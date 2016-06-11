@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir" : "./dist/js"
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules",
+    "typings/globals",
+    "dist"
+  ]
+}
