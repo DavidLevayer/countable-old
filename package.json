@@ -18,7 +18,8 @@
   "license": "MIT",
   "dependencies": {
     "systemjs": "0.19.27",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "mysql": "^2.5.4"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",

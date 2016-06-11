@@ -72,19 +72,28 @@ Add dependency in __package.json__:
     }
 }
 ```
+Install it globally (not a requirement, but definitely more practical):
+```shell
+npm install typings --global
+```
 The __typings.json__ file specifies what JS definition are required for the project:
 ```json
 {
   "globalDependencies": {
     "core-js": "registry:dt/core-js#0.0.0+20160317120654",
     "node": "registry:dt/node#4.0.0+20160509154515"
+    ...
   }
 }
 
 ```
-```globalDependencies --core-js``` TODO
 
-```globalDependencies --node``` Specify Node.js definition.
+#### Install new typings definition
+```shell
+typings install <definitionName> --save
+```
+
+--save option permits to update your ```typings.json``` file. A simple way to find out __definitionName__ is to use ```typings search``` command.
 
 Then just download and install definitions:
 ```shell
@@ -143,3 +152,23 @@ The __systemjs.config.js__ file specifies the root files and the compiler option
 https://github.com/systemjs/systemjs
 
 https://github.com/systemjs/systemjs/blob/master/docs/config-api.md
+
+## MySQL
+#### What is it?
+Let's assume you know what MySQL is and what it is used for :)
+#### How to use?
+Add dependency in __package.json__:
+```json
+{
+    "dependencies": {
+        "mysql": "^2.5.4"
+    }
+}
+```
+Add Typings definition:
+```shell
+typings install mysql --save
+```
+#### More information
+https://codeforgeek.com/2015/01/nodejs-mysql-tutorial/
+
