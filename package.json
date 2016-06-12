@@ -4,7 +4,7 @@
   "description": "account management",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run tsc:w\" \"node dist/js/index.js\" ",
+    "start": "tsc && concurrently \"npm run tsc:w\" \"node dist/js/index.js\" ",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
