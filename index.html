@@ -1,9 +1,11 @@
 <html>
 <head>
-    <script>document.write('<base href="' + document.location + '" />');</script>
-    <title>Angular 2 QuickStart</title>
+
+    <title>Countable</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+
     <!-- 1. Load libraries -->
     <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -21,6 +23,16 @@
 <!-- 3. Display the application -->
 <body>
 <h1>index.html</h1>
-<my-app>Loading...</my-app>
+<my-app>
+    <div class="sampleContainer">
+        <div class="loader">
+            <span class="dot dot_1"></span>
+            <span class="dot dot_2"></span>
+            <span class="dot dot_3"></span>
+            <span class="dot dot_4"></span>
+            <span class="text">Loading...</span>
+        </div>
+    </div>
+</my-app>
 </body>
 </html>
