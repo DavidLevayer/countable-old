@@ -2,15 +2,23 @@
 
     <div class="col-xs-3 col-sm-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Dashboard</a></li>
-            <li><a href="#">Accounts</a></li>
-            <li><a href="#">Transaction</a></li>
-            <li><a href="#">Options</a></li>
+            <li [class.active]="isActiveRoute('/dashboard')">
+                <a [routerLink]="['/dashboard']">Dashboard</a>
+            </li>
+            <li [class.active]="isActiveRoute('/account')">
+                <a [routerLink]="['/account']">Account</a>
+            </li>
+            <li [class.active]="isActiveRoute('/transaction')">
+                <a [routerLink]="['/transaction']">Transaction</a>
+            </li>
+            <li [class.active]="isActiveRoute('/option')">
+                <a [routerLink]="['/option']">Option</a>
+            </li>
         </ul>
     </div>
 
     <div class="col-xs-9 col-sm-10">
-
+        <router-outlet></router-outlet>
     </div>
 
 </div>
