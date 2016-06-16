@@ -32,8 +32,15 @@ The __tsconfig.json__ file specifies the root files and the compiler options req
 ```json
 {
   "compilerOptions": {
+    "target": "es5",
     "module": "commonjs",
-    "outDir": "./dist/js"
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "outDir" : "./dist/js"
   },
   "compileOnSave": false,
   "exclude": [
@@ -81,8 +88,9 @@ The __typings.json__ file specifies what JS definition are required for the proj
 {
   "globalDependencies": {
     "core-js": "registry:dt/core-js#0.0.0+20160317120654",
+    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
+    "mysql": "registry:dt/mysql#0.0.0+20160316155526",
     "node": "registry:dt/node#4.0.0+20160509154515"
-    ...
   }
 }
 
