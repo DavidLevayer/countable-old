@@ -1,4 +1,5 @@
 import {SQLConnector} from "./server/mysql/mysql-index";
+import {DatabaseConnector} from "./server/database.connector";
 
 var express = require('express');
 var app = express();
@@ -15,9 +16,10 @@ var db_name:string = "db_countable";
 
 app.use(express.static(__projectRoot + '/'));
 
-var mSQLConnector = new SQLConnector(100, db_host, db_user, db_password, db_name);
+var mSQLConnector: DatabaseConnector = new SQLConnector(100, db_host, db_user, db_password, db_name);
 
 require('./server/test/test-index.js')(app, mSQLConnector, db_name);
+require('./server/account/account.server.js')(app, mSQLConnector);
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__projectRoot + '/index.html'));

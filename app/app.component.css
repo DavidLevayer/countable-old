@@ -1,8 +1,9 @@
 
 .container {
-    margin-top: 50px;
+    margin-top: 80px;
     border: 1px solid lightgrey;
     padding-left: 0;
+    padding-right: 0;
 }
 
 .sidebar {
@@ -33,4 +34,10 @@
 .nav-sidebar > .active > a:focus {
     color: #fff;
     background-color: #e57a05;
+}
+
+.navigation-icons {
+    position: absolute;
+    right: 0;
+    top: -24px;
 }

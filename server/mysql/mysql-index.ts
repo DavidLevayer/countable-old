@@ -1,4 +1,6 @@
-export class SQLConnector {
+import {DatabaseConnector} from "../database.connector";
+
+export class SQLConnector implements DatabaseConnector{
 
     private mysql:any;
     private pool:any;

@@ -9,7 +9,7 @@ import {OptionComponent} from './option/option.component';
 @Component({
     selector: 'my-app',
     templateUrl: 'app/app.component.html',
-    styleUrls: ['app/app.component.css'],
+    styleUrls: ['app/shared/css/common.css','app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
     providers: [ROUTER_PROVIDERS]
 })

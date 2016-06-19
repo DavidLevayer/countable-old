@@ -1,1 +1,27 @@
-<h1>account</h1>
+<h1 class="pull-right title">List of accounts</h1>
+<div *ngIf="error" class="alert alert-danger alert-styled-left alert-arrow-left alert-bordered">
+    {{error}}
+</div>
+<div class="col-sm-8 col-sm-offset-4 col-xs-12 ">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="col-sm-1 hidden-xs">#</th>
+            <th class="col-sm-9 col-xs-10">Name</th>
+            <th class="col-xs-2"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let account of accounts">
+            <th scope="row">{{account.account_id}}</th>
+            <td id="account_{{account.account_id}}"><span>{{account.name}}</span></td>
+            <td>
+                <button (click)="editAccount(account.account_id)"
+                        class="btn btn-icon btn-xs btn-default fa fa-edit fa-fw"></button>
+                <button (click)="removeAccount(account.account_id)"
+                        class="btn btn-icon btn-xs btn-default fa fa-remove fa-fw"></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
