@@ -2,13 +2,12 @@ import {Application} from "express";
 import {DatabaseConnector} from "../database.connector";
 
 
-
 module.exports = function (app:Application, connector:DatabaseConnector) {
-    
+
     /**
      * Return a list of all accounts
      */
-    app.get('/api/account/', function (req, res) {
+    app.get('/api/account/list', function (req, res) {
         var query = 'SELECT * FROM Account;';
         connector.handleRequest(req, res, query);
     });
@@ -22,6 +21,20 @@ module.exports = function (app:Application, connector:DatabaseConnector) {
 
         if (name != null && name.length > 0) {
             var query = 'INSERT INTO Account VALUES (' + name + ');';
+            connector.handleRequest(req, res, query);
+        }
+    });
+
+    /**
+     * Edit an account
+     */
+    app.put('/api/account/edit', function (req, res) {
+
+        var id:string = req.body.id;
+        var name:string = req.body.name;
+
+        if (id != null && id.length > 0) {
+            var query = 'UPDATE Account SET name = ' + name + ' WHERE account_id = ' + id + ';';
             connector.handleRequest(req, res, query);
         }
     });
