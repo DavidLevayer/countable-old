@@ -1,8 +1,8 @@
 {
   "globalDependencies": {
-    "core-js": "registry:dt/core-js#0.0.0+20160317120654",
-    "node": "registry:dt/node#4.0.0+20160509154515",
-    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
-    "mysql": "registry:dt/mysql#0.0.0+20160316155526"
+    "core-js": "registry:dt/core-js#0.0.0+20160602141332",
+    "jquery": "registry:dt/jquery#1.10.0+20160620094458",
+    "mysql": "registry:dt/mysql#0.0.0+20160316155526",
+    "node": "registry:dt/node#6.0.0+20160621231320"
   }
 }
