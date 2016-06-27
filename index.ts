@@ -21,7 +21,7 @@ var mSQLConnector: DatabaseConnector = new SQLConnector(100, db_host, db_user, d
 require('./server/test/test-index.js')(app, mSQLConnector, db_name);
 require('./server/account/account.server.js')(app, mSQLConnector);
 
-app.get('/', function (req, res) {
+app.get('/*', function (req, res) {
     res.sendFile(path.join(__projectRoot + '/index.html'));
 });
 
