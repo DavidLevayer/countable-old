@@ -1,4 +1,4 @@
-import {Http, Response} from '@angular/http';
+import {Http, Response, Headers} from '@angular/http';
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -18,8 +18,15 @@ export class AccountService {
     }
 
     editAccount(id:number, name:string) {
-        var body = JSON.stringify({id: id, name: name});
-        return this.http.post(this.url_edit, body)
+
+        var headers: Headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+        var data = "id=" + id + "&name=" + name;
+
+        return this.http.put(this.url_edit, data, {
+            headers: headers
+        })
             .toPromise()
             .then(this.extractResult)
             .catch(this.handleError);

@@ -3,6 +3,7 @@ import {DatabaseConnector} from "./server/database.connector";
 
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser')
 var path = require('path');
 
 var __projectRoot = __dirname + '/../../';
@@ -15,6 +16,7 @@ var db_password:string = "root";
 var db_name:string = "db_countable";
 
 app.use(express.static(__projectRoot + '/'));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 var mSQLConnector: DatabaseConnector = new SQLConnector(100, db_host, db_user, db_password, db_name);
 

@@ -1,6 +1,5 @@
-import {Application} from "express";
+import {Application, Request, Response} from "express";
 import {DatabaseConnector} from "../database.connector";
-
 
 module.exports = function (app:Application, connector:DatabaseConnector) {
 
@@ -28,14 +27,22 @@ module.exports = function (app:Application, connector:DatabaseConnector) {
     /**
      * Edit an account
      */
-    app.put('/api/account/edit', function (req, res) {
+    app.put('/api/account/edit', function (req: Request, res: Response) {
 
+        console.log('getting here... so far so good!');
+        console.log(req.body);
         var id:string = req.body.id;
         var name:string = req.body.name;
 
         if (id != null && id.length > 0) {
-            var query = 'UPDATE Account SET name = ' + name + ' WHERE account_id = ' + id + ';';
+            console.log('before request');
+            var query = 'UPDATE Account SET name = "' + name + '" WHERE account_id = "' + id + '";';
             connector.handleRequest(req, res, query);
+        } else {
+            res.status(418);
+            console.log('wrong param');
+            res.json();
+            return;
         }
     });
 
