@@ -40,6 +40,7 @@ export class SQLConnector implements DatabaseConnector {
                 connection.release();
                 if (!err) {
                     console.log('Running query "' + query + '"');
+                    console.log(rows);
                     res.json(rows);
                 } else {
                     console.log('Error while executing request: ' + query);

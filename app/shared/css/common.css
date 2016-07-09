@@ -1,7 +1,19 @@
+.header {
+    margin-bottom: 20px;
+}
+
 .title {
     color: #333;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin: 0;
+}
+
+.title.pull-right {
+    margin-left: 10px;
+}
+
+.title.pull-left {
+    margin-right: 10px;
 }
 
 .btn-icon {

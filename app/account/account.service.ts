@@ -4,47 +4,92 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class AccountService {
 
-    private url_list:string = "/api/account/list";
-    private url_edit:string = "/api/account/edit";
+    private base_url:string = "/api/account/";
 
     constructor(private http:Http) {
     }
 
+    /**
+     * Get list of accounts from server
+     */
     getAccounts() {
-        return this.http.get(this.url_list)
+        return this.http.get(this.base_url)
             .toPromise()
-            .then(this.extractResult)
-            .catch(this.handleError);
+            .then(AccountService.extractResult)
+            .catch(AccountService.handleError);
     }
 
-    editAccount(id:number, name:string) {
+    /**
+     * Get account with given id
+     * @param id the account id
+     */
+    getAccount(id:number) {
+        return this.http.get(this.base_url + id)
+            .toPromise()
+            .then(AccountService.extractResult)
+            .catch(AccountService.handleError);
+    }
 
-        var headers: Headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    /**
+     * Create an account
+     */
+    createAccount(name:string) {
 
-        var data = "id=" + id + "&name=" + name;
+        var data = "name=" + name;
 
-        return this.http.put(this.url_edit, data, {
-            headers: headers
+        return this.http.post(this.base_url, data, {
+            headers: AccountService.getHeaders()
         })
             .toPromise()
-            .then(this.extractResult)
-            .catch(this.handleError);
+            .then(AccountService.extractResult)
+            .catch(AccountService.handleError);
     }
 
-    private extractResult(res:Response) {
+    /**
+     * Modify an account name using associated service
+     * @param id the account id
+     * @param name the account new name
+     */
+    editAccount(id:number, name:string) {
+
+        var data = "name=" + name;
+
+        return this.http.put(this.base_url + id, data, {
+            headers: AccountService.getHeaders()
+        })
+            .toPromise()
+            .then(AccountService.extractResult)
+            .catch(AccountService.handleError);
+    }
+
+    /**
+     * Remove an account using associated service
+     * @param id the account id
+     */
+    deleteAccount(id:number) {
+
+        return this.http.delete(this.base_url + id)
+            .toPromise()
+            .then(AccountService.extractResult)
+            .catch(AccountService.handleError);
+    }
+
+    private static extractResult(res:Response) {
         return res.json();
     }
 
     /**
      * Extract error message from server response
      */
-    private handleError(error:any) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
-        let errMsg = (error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
+    private static handleError(error:any) {
+        let errMsg:string = error._body;
+        console.error(error); // log to console
         return Promise.reject(errMsg);
+    }
+
+    private static getHeaders():Headers {
+        var headers:Headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        return headers;
     }
 }

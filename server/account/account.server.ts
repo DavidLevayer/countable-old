@@ -6,56 +6,65 @@ module.exports = function (app:Application, connector:DatabaseConnector) {
     /**
      * Return a list of all accounts
      */
-    app.get('/api/account/list', function (req, res) {
+    app.get('/api/account/', function (req:Request, res:Response) {
         var query = 'SELECT * FROM Account;';
+        connector.handleRequest(req, res, query);
+    });
+
+    /**
+     * Get a specific account
+     */
+    app.get('/api/account/:id', function (req:Request, res:Response) {
+        var query = 'SELECT * FROM Account WHERE account_id = ' + req.param('id') + ';';
         connector.handleRequest(req, res, query);
     });
 
     /**
      * Add a new account
      */
-    app.post('/api/account/new', function (req, res) {
+    app.post('/api/account/', function (req, res) {
 
         var name:string = req.body.name;
 
         if (name != null && name.length > 0) {
-            var query = 'INSERT INTO Account VALUES (' + name + ');';
+            var query = 'INSERT INTO Account (name) VALUES ("' + name + '");';
             connector.handleRequest(req, res, query);
+        } else {
+            res.send(400, 'Missing parameter');
+            return;
         }
     });
 
     /**
      * Edit an account
      */
-    app.put('/api/account/edit', function (req: Request, res: Response) {
+    app.put('/api/account/:id', function (req:Request, res:Response) {
 
-        console.log('getting here... so far so good!');
-        console.log(req.body);
-        var id:string = req.body.id;
+        var id:string = req.param('id');
         var name:string = req.body.name;
 
-        if (id != null && id.length > 0) {
-            console.log('before request');
+        if (id != null && id.length > 0 && name != null && name.length > 0) {
             var query = 'UPDATE Account SET name = "' + name + '" WHERE account_id = "' + id + '";';
             connector.handleRequest(req, res, query);
         } else {
-            res.status(418);
-            console.log('wrong param');
-            res.json();
+            res.send(400, 'Missing parameter');
             return;
         }
     });
 
     /**
-     * Delete an account a list of all accounts
+     * Delete an account
      */
-    app.delete('/api/account/delete', function (req, res) {
+    app.delete('/api/account/:id', function (req:Request, res:Response) {
 
-        var id:string = req.body.id;
+        var id:string = req.param('id');
 
-        if (name != null && name.length > 0) {
+        if (id != null && id.length > 0) {
             var query = 'DELETE FROM Account WHERE account_id = ' + id + ';';
             connector.handleRequest(req, res, query);
+        } else {
+            res.send(400, 'Missing parameter');
+            return;
         }
     });
 };
