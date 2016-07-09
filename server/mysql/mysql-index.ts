@@ -1,7 +1,7 @@
 import {DatabaseConnector} from "../database.connector";
 import {Request, Response} from "express";
 
-export class SQLConnector implements DatabaseConnector{
+export class SQLConnector implements DatabaseConnector {
 
     private mysql:any;
     private pool:any;
@@ -25,12 +25,12 @@ export class SQLConnector implements DatabaseConnector{
         });
     }
 
-    handleRequest(req: Request, res: Response, query: string) {
+    handleRequest(req:Request, res:Response, query:string) {
 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 connection.release();
-                res.json({"code": 100, "status": "Error in connection database"});
+                res.send(500, 'Error in connection database');
                 return;
             }
 
@@ -42,14 +42,15 @@ export class SQLConnector implements DatabaseConnector{
                     console.log('Running query "' + query + '"');
                     res.json(rows);
                 } else {
-                    console.log('Error while executing request: '+ query);
+                    console.log('Error while executing request: ' + query);
                     console.log(err);
-                    res.json(err);
+                    res.send(500, err.errno + ' - ' + err.code);
                 }
             });
 
             connection.on('error', function (err) {
-                res.json({"code": 100, "status": "Error in connection database"});
+                console.log(err);
+                res.send(500, 'Error in connection database');
                 return;
             });
         });
