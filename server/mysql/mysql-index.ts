@@ -1,4 +1,5 @@
 import {DatabaseConnector} from "../database.connector";
+import {Request, Response} from "express";
 
 export class SQLConnector implements DatabaseConnector{
 
@@ -24,7 +25,7 @@ export class SQLConnector implements DatabaseConnector{
         });
     }
 
-    handleRequest(req, res, query) {
+    handleRequest(req: Request, res: Response, query: string) {
 
         this.pool.getConnection(function (err, connection) {
             if (err) {
@@ -34,12 +35,16 @@ export class SQLConnector implements DatabaseConnector{
             }
 
             console.log('Connected as id ' + connection.threadId);
-            console.log('Running query "' + query + '"');
 
             connection.query(query, function (err, rows) {
                 connection.release();
                 if (!err) {
+                    console.log('Running query "' + query + '"');
                     res.json(rows);
+                } else {
+                    console.log('Error while executing request: '+ query);
+                    console.log(err);
+                    res.json(err);
                 }
             });
 
