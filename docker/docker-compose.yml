@@ -1,0 +1,26 @@
+version: '2'
+services:
+  nodejs:
+    build: ./nodejs
+    ports:
+      - "3000:3000"
+    volumes:
+      - /var/workspace/countable/src:/var/countable/
+    networks:
+      - front
+      - back
+
+  mariadb:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mariadb/01-countable.ddl.sql:/docker-entrypoint-initdb.d/01-countable.ddl.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - back
+
+networks:
+  front:
+  back:

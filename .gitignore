@@ -2,3 +2,7 @@ node_modules
 .idea
 typings
 dist
+#ignore all js file except these : 
+src/*.js
+!src/index.ts
+!src/systemjs.config.js

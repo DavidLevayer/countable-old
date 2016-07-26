@@ -3,14 +3,14 @@ import {DatabaseConnector} from "./server/database.connector";
 
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var path = require('path');
 
 var __projectRoot = __dirname + '/../../';
 
 var server_port:number = 3000;
 // TODO Put db information into gitignored external file
-var db_host:string = "localhost";
+var db_host:string = "mariadb";
 var db_user:string = "root";
 var db_password:string = "root";
 var db_name:string = "db_countable";
