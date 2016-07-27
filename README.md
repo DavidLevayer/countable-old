@@ -2,6 +2,14 @@
 
 TODO
 
+#Installation
+The application can be run with docker. If you want to run it with this technology, you need to install previously docker in your server. To see how to do it, you can go on the official web site : https://www.docker.com/products/docker.
+If you install this application in a windows environment, don't forget to put the application inside the virtual machine (through a dynamic montage for example)  
+
+The next step is to go to the directory **docker** on this project and run the command `docker-compose up` in a bash terminal. Some scripts will download all dependencies need by the application and after that, will start the application.
+
+* On a windows environment, you can see if it's working by going to the website http://192.168.99.100:3000 where 192.168.99.100 is the virtual machine IP and 3000 is the port of the application.
+
 # Node.js
 
 ## Configuration
@@ -87,18 +95,23 @@ The __typings.json__ file specifies what JS definition are required for the proj
 ```json
 {
   "globalDependencies": {
-    "core-js": "registry:dt/core-js#0.0.0+20160317120654",
-    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
-    "mysql": "registry:dt/mysql#0.0.0+20160316155526",
-    "node": "registry:dt/node#4.0.0+20160509154515"
-  }
+      "core-js": "registry:dt/core-js#0.0.0+20160602141332",
+      "express": "registry:dt/express#4.0.0+20160708185218",
+      "express-serve-static-core": "registry:dt/express-serve-static-core#4.0.0+20160715232503",
+      "jquery": "registry:dt/jquery#1.10.0+20160704162008",
+      "mime": "registry:dt/mime#0.0.0+20160316155526",
+      "mysql": "registry:dt/mysql#0.0.0+20160316155526",
+      "node": "registry:dt/node#6.0.0+20160720070758",
+      "serve-static": "registry:dt/serve-static#0.0.0+20160606155157"
+    }
 }
 
 ```
 
 #### Install new typings definition
 ```shell
-typings install <definitionName> --save
+typings install <definitionName> --save                        # simple way, but require global installation
+npm run typings -- install <definitionName> --global --save    # other way through npm ; require to define command in "scripts" in package.json
 ```
 
 --save option permits to update your ```typings.json``` file. A simple way to find out __definitionName__ is to use ```typings search``` command.
