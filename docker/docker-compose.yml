@@ -5,7 +5,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - /var/workspace/countable/src:/var/countable/
+      - ../src:/var/countable/
     networks:
       - front
       - back
