@@ -1,0 +1,15 @@
+#exclude ide folder/files
+.idea/
+
+#exclude git files
+.git/
+.gitignore
+
+#exclude generated files
+src/dist
+src/node_modules
+src/typings
+
+#all js files are ignored
+*.js
+!systemjs.config.js

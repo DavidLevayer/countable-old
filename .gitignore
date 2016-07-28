@@ -1,8 +1,12 @@
-node_modules
+#jetbrains ide folder
 .idea
-typings
-dist
-#ignore all js file except these : 
+
+#folder automatically generated
+src/node_modules
+src/typings
+src/dist
+
+#all js files are ignored
 src/*.js
-!src/index.ts
+#except these :
 !src/systemjs.config.js
