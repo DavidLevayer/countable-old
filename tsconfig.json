@@ -10,7 +10,6 @@
     "noImplicitAny": false,
     "outDir" : "./dist/js"
   },
-  "compileOnSave": false,
   "exclude": [
     "node_modules",
     "typings/globals",

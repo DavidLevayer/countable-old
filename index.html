@@ -1,15 +1,12 @@
 <html>
 <head>
-
-    <title>Countable</title>
+    <title>Angular QuickStart</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
-    <base href="/">
-
     <!-- 1. Load libraries -->
     <!-- Polyfill(s) for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/core-js/client/shim.js"></script>
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
@@ -21,29 +18,9 @@
             console.error(err);
         });
     </script>
-
-    <!-- 3. Global libraries -->
-    <!-- jQuery -->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <!-- Twitter Bootstrap -->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- Font awesome -->
-    <link rel="stylesheet" href="node_modules/components-font-awesome/css/font-awesome.min.css">
-
 </head>
 <!-- 3. Display the application -->
 <body>
-<my-app>
-    <div class="sampleContainer">
-        <div class="loader">
-            <span class="dot dot_1"></span>
-            <span class="dot dot_2"></span>
-            <span class="dot dot_3"></span>
-            <span class="dot dot_4"></span>
-            <span class="text"><b>Loading...</b></span>
-        </div>
-    </div>
-</my-app>
+<my-app>Loading...</my-app>
 </body>
 </html>

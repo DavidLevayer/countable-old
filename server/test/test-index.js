@@ -1,6 +1,4 @@
-
-module.exports = function(app) {
-
+module.exports = function (app) {
     /**
      * Returns "hello world" (debug function)
      */
@@ -10,3 +8,4 @@ module.exports = function(app) {
         res.end(welcomeString);
     });
 };
+//# sourceMappingURL=test-index.js.map
