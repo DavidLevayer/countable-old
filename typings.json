@@ -1,7 +1,8 @@
 {
   "globalDependencies": {
     "core-js": "registry:dt/core-js#0.0.0+20160725163759",
-    "node": "registry:dt/node#6.0.0+20160909174046"
+    "node": "registry:dt/node#6.0.0+20160909174046",
+    "sqlite3": "registry:dt/sqlite3#2.2.3+20160724070935"
   },
   "dependencies": {
     "express": "registry:npm/express#4.14.0+20160925001530",

@@ -25,9 +25,16 @@ export class SQLConnector implements DatabaseConnector {
         });
     }
 
+    executeQuery(query:string){
+        // TODO Implementation for MySQL
+    }
+
     handleRequest(req:Request, res:Response, query:string) {
 
         this.pool.getConnection(function (err, connection) {
+
+            // TODO Manage if connection is not defined
+
             if (err) {
                 connection.release();
                 res.send('Error in connection database');
