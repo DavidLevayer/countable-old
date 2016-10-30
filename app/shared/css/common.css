@@ -1,0 +1,36 @@
+.header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.header > button {
+    margin-top: 10px;
+}
+
+.title {
+    color: #333;
+    font-weight: bold;
+    display: inline;
+}
+
+.title.pull-right {
+    margin-left: 10px;
+}
+
+.title.pull-left {
+    margin-right: 10px;
+}
+
+.btn-icon {
+    border: none;
+    color: grey;
+}
+
+.btn-icon:hover, .btn-icon:active {
+    background: transparent !important;
+}
+
+.btn-icon:focus, .btn-icon:active {
+    box-shadow: none;
+    outline: 0;
+}

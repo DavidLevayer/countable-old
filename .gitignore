@@ -3,3 +3,4 @@ node_modules
 typings
 dist
 countable-database.sqlite
+npm-debug.log
