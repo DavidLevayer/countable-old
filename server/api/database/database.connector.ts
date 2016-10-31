@@ -1,7 +1,7 @@
 import {Request} from "express";
 import {Response} from "express";
 
-export interface DatabaseConnector {
+export interface IDatabaseConnector {
 
     executeQuery(query: string);
     handleRequest(req: Request, res: Response, query: string, queryType: QueryType);

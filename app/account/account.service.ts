@@ -1,20 +1,39 @@
-import {Http, Response, Headers} from '@angular/http';
-import {Injectable} from '@angular/core';
-import 'rxjs/add/operator/toPromise';
+import {Http, Response, Headers} from "@angular/http";
+import {Injectable} from "@angular/core";
+import "rxjs/add/operator/toPromise";
 
 @Injectable()
 export class AccountService {
 
-    private base_url:string = "/api/account/";
+    private static BASE_URL: string = "/api/account/";
 
-    constructor(private http:Http) {
+    private static extractResult(res: Response) {
+        return res.json();
+    }
+
+    /**
+     * Extract error message from server response
+     */
+    private static handleError(error: any) {
+        const errMsg: string = error._body;
+        console.error(error); // log to console
+        return Promise.reject(errMsg);
+    }
+
+    private static getHeaders(): Headers {
+        const headers: Headers = new Headers();
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+        return headers;
+    }
+
+    constructor(private http: Http) {
     }
 
     /**
      * Get list of accounts from server
      */
-    getAccounts() {
-        return this.http.get(this.base_url)
+    public getAccounts() {
+        return this.http.get(AccountService.BASE_URL)
             .toPromise()
             .then(AccountService.extractResult)
             .catch(AccountService.handleError);
@@ -24,9 +43,9 @@ export class AccountService {
      * Get account with given id
      * @param id the account id
      */
-    getAccount(id:number) {
+    public getAccount(id: number) {
 
-        return this.http.get(this.base_url + id)
+        return this.http.get(AccountService.BASE_URL + id)
             .toPromise()
             .then(AccountService.extractResult)
             .catch(AccountService.handleError);
@@ -35,13 +54,11 @@ export class AccountService {
     /**
      * Create an account
      */
-    createAccount(name:string) {
+    public createAccount(name: string) {
 
-        var data = "name=" + name;
+        const data = "name=" + name;
 
-        return this.http.post(this.base_url, data, {
-            headers: AccountService.getHeaders()
-        })
+        return this.http.post(AccountService.BASE_URL, data, {headers: AccountService.getHeaders()})
             .toPromise()
             .then(AccountService.extractResult)
             .catch(AccountService.handleError);
@@ -52,13 +69,11 @@ export class AccountService {
      * @param id the account id
      * @param name the account new name
      */
-    editAccount(id:number, name:string) {
+    public editAccount(id: number, name: string) {
 
-        var data = "name=" + name;
+        const data = "name=" + name;
 
-        return this.http.put(this.base_url + id, data, {
-            headers: AccountService.getHeaders()
-        })
+        return this.http.put(AccountService.BASE_URL + id, data, {headers: AccountService.getHeaders()})
             .toPromise()
             .then(AccountService.extractResult)
             .catch(AccountService.handleError);
@@ -68,30 +83,11 @@ export class AccountService {
      * Remove an account using associated service
      * @param id the account id
      */
-    deleteAccount(id:number) {
+    public deleteAccount(id: number) {
 
-        return this.http.delete(this.base_url + id)
+        return this.http.delete(AccountService.BASE_URL + id)
             .toPromise()
             .then(AccountService.extractResult)
             .catch(AccountService.handleError);
-    }
-
-    private static extractResult(res:Response) {
-        return res.json();
-    }
-
-    /**
-     * Extract error message from server response
-     */
-    private static handleError(error:any) {
-        let errMsg:string = error._body;
-        console.error(error); // log to console
-        return Promise.reject(errMsg);
-    }
-
-    private static getHeaders():Headers {
-        var headers:Headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        return headers;
     }
 }

@@ -1,47 +1,47 @@
-import { join } from "path";
-import { DatabaseConnector } from "./api/database/database.connector";
+import {join} from "path";
+
+import {IDatabaseConnector} from "./api/database/database.connector";
 import {SQLiteConnector} from "./implementation/database/sqlite.connector";
 import {populationQueries} from "./database.service";
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
+import * as express from "express";
+import * as bodyParser from "body-parser";
+
+// Test modules
+import {testHelloWorld} from "./implementation/test/helloworld.test";
+import {testHelloSqlite} from "./implementation/test/sqlite.test";
+
+// Functional modules
+import {accountModule} from "./implementation/account/account.server";
 
 const app = express();
-var __projectRoot = __dirname + '/../../../';
+const projectRoot = __dirname + "/../../../";
 
-app.use(express.static(__projectRoot));
-app.use(express.static(join(__projectRoot +'/node_modules')));
-app.use(express.static(join(__projectRoot +'/tools')));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(projectRoot));
+app.use(express.static(join(projectRoot + "/node_modules")));
+app.use(express.static(join(projectRoot + "/tools")));
+app.use(bodyParser.urlencoded({extended: false}));
 
-var server_port:number = 3000;
+const serverPort: number = 3000;
 
 // TODO Put db information into gitignored external file
 
-/*var db_host:string = "localhost";
-var db_user:string = "root";
-var db_password:string = "root";
-var db_name:string = "db_countable";
+const dbFilename: string = "./countable-database.sqlite";
+const databaseConnector: IDatabaseConnector = new SQLiteConnector(dbFilename);
 
-var mSQLConnector: DatabaseConnector = new SQLConnector(100, db_host, db_user, db_password, db_name);*/
-
-var db_filename:string = "./countable-database.sqlite";
-var databaseConnector: DatabaseConnector = new SQLiteConnector(db_filename);
-
-populationQueries.forEach(function(query){
+populationQueries.forEach(function (query) {
     databaseConnector.executeQuery(query);
 });
 
 // Test modules
-require('./implementation/test/helloworld.test.js')(app);
-require('./implementation/test/sqlite.test.js')(app, databaseConnector);
+testHelloWorld(app);
+testHelloSqlite(app, databaseConnector);
 
-// Account module
-require('./implementation/account/account.server.js')(app, databaseConnector);
+// Functional modules
+accountModule(app, databaseConnector);
 
-app.get('/*', function (req, res) {
-    res.sendFile(join(__projectRoot + '/index.html'));
+app.get("/*", function (req, res) {
+    res.sendFile(join(projectRoot + "/index.html"));
 });
 
-app.listen(server_port);
+app.listen(serverPort);

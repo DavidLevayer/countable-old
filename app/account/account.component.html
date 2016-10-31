@@ -20,18 +20,18 @@
         </thead>
         <tbody>
         <tr *ngFor="let account of accounts">
-            <th scope="row">{{account.account_id}}</th>
-            <td id="account_{{account.account_id}}">
+            <th scope="row">{{account.accountId}}</th>
+            <td id="account_{{account.accountId}}">
                 <span>{{account.name}}</span>
             </td>
             <td>
-                <button (click)="toogleEditMode(account.account_id)"
+                <button (click)="toogleEditMode(account.accountId)"
                         class="btn btn-icon btn-xs btn-default fa fa-pencil fa-fw" [disabled]="editMode"></button>
-                <button (click)="editAccount(account.account_id)" *ngIf="editMode==true"
+                <button (click)="editAccount(account.accountId)" *ngIf="editMode==true"
                         class="btn btn-icon btn-xs btn-default fa fa-check fa-fw"></button>
-                <button (click)="cancelModification(account.account_id)" *ngIf="editMode==true"
+                <button (click)="cancelModification(account.accountId)" *ngIf="editMode==true"
                         class="btn btn-icon btn-xs btn-default fa fa-remove fa-fw"></button>
-                <button (click)="deleteAccount(account.account_id)"
+                <button (click)="deleteAccount(account.accountId)"
                         class="btn btn-icon btn-xs btn-default fa fa-trash fa-fw"></button>
             </td>
         </tr>

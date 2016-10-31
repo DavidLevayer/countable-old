@@ -1,9 +1,8 @@
-
-var accountTableQuery: string =
-    "CREATE TABLE IF NOT EXISTS Account("+
-    "account_id INTEGER PRIMARY KEY,"+
+const accountTableQuery: string =
+    "CREATE TABLE IF NOT EXISTS Account(" +
+    "accountId INTEGER PRIMARY KEY," +
     "name TEXT NOT NULL);";
 
-export var populationQueries: string[] = [
-    accountTableQuery
+export const populationQueries: string[] = [
+    accountTableQuery,
 ];
