@@ -1,30 +1,12 @@
-import {Http, Response, Headers} from "@angular/http";
+import {Http, Headers} from "@angular/http";
 import {Injectable} from "@angular/core";
 import "rxjs/add/operator/toPromise";
+import {Account} from "./account";
 
 @Injectable()
 export class AccountService {
 
     private static BASE_URL: string = "/api/account/";
-
-    private static extractResult(res: Response) {
-        return res.json();
-    }
-
-    /**
-     * Extract error message from server response
-     */
-    private static handleError(error: any) {
-        const errMsg: string = error._body;
-        console.error(error); // log to console
-        return Promise.reject(errMsg);
-    }
-
-    private static getHeaders(): Headers {
-        const headers: Headers = new Headers();
-        headers.append("Content-Type", "application/x-www-form-urlencoded");
-        return headers;
-    }
 
     constructor(private http: Http) {
     }
@@ -32,36 +14,36 @@ export class AccountService {
     /**
      * Get list of accounts from server
      */
-    public getAccounts() {
+    public getAccounts(): Promise<Account[]> {
         return this.http.get(AccountService.BASE_URL)
             .toPromise()
-            .then(AccountService.extractResult)
-            .catch(AccountService.handleError);
+            .then(response => response.json() as Account[])
+            .catch(this.handleError);
     }
 
     /**
      * Get account with given id
      * @param id the account id
      */
-    public getAccount(id: number) {
+    public getAccount(id: number): Promise<Account> {
 
         return this.http.get(AccountService.BASE_URL + id)
             .toPromise()
-            .then(AccountService.extractResult)
-            .catch(AccountService.handleError);
+            .then(response => response.json() as Account)
+            .catch(this.handleError);
     }
 
     /**
      * Create an account
      */
-    public createAccount(name: string) {
+    public createAccount(name: string): Promise<any> {
 
         const data = "name=" + name;
 
-        return this.http.post(AccountService.BASE_URL, data, {headers: AccountService.getHeaders()})
+        return this.http.post(AccountService.BASE_URL, data, {headers: this.getHeaders()})
             .toPromise()
-            .then(AccountService.extractResult)
-            .catch(AccountService.handleError);
+            .then(response => response.json())
+            .catch(this.handleError);
     }
 
     /**
@@ -69,25 +51,39 @@ export class AccountService {
      * @param id the account id
      * @param name the account new name
      */
-    public editAccount(id: number, name: string) {
+    public editAccount(id: number, name: string): Promise<any> {
 
         const data = "name=" + name;
 
-        return this.http.put(AccountService.BASE_URL + id, data, {headers: AccountService.getHeaders()})
+        return this.http.put(AccountService.BASE_URL + id, data, {headers: this.getHeaders()})
             .toPromise()
-            .then(AccountService.extractResult)
-            .catch(AccountService.handleError);
+            .then(response => response.json())
+            .catch(this.handleError);
     }
 
     /**
      * Remove an account using associated service
      * @param id the account id
      */
-    public deleteAccount(id: number) {
+    public deleteAccount(id: number): Promise<any> {
 
         return this.http.delete(AccountService.BASE_URL + id)
             .toPromise()
-            .then(AccountService.extractResult)
-            .catch(AccountService.handleError);
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    /**
+     * Extract error message from server response
+     */
+    private handleError(error: any): Promise<any> {
+        console.error("An error occurred", error);
+        return Promise.reject(error.message || error);
+    }
+
+    private getHeaders(): Headers {
+        const headers: Headers = new Headers();
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+        return headers;
     }
 }
