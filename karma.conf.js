@@ -9,8 +9,9 @@ module.exports = function(config) {
         basePath: '',
         frameworks: ['jasmine'],
         plugins: [
-            require('karma-jasmine'),
-            require('karma-chrome-launcher'),
+            'karma-jasmine',
+            'karma-chrome-launcher',
+            'karma-mocha-reporter'
         ],
 
         files: [
@@ -64,7 +65,7 @@ module.exports = function(config) {
 
         exclude: [],
         preprocessors: {},
-        reporters: ['progress'],
+        reporters: ['mocha'],
 
         port: 9876,
         colors: true,
