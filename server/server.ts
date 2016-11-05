@@ -14,7 +14,7 @@ import {testHelloSqlite} from './implementation/test/sqlite.test';
 // Functional modules
 import {accountModule} from './implementation/account/account.server';
 
-const app = express();
+const app: express.Application = express();
 const projectRoot = __dirname + '/../../../';
 
 app.use(express.static(projectRoot));
