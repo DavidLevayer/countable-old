@@ -1,32 +1,32 @@
+
 import {join} from "path";
+import {IDatabaseConnector} from './api/database/database.connector';
+import {SQLiteConnector} from './implementation/database/sqlite.connector';
+import {populationQueries} from './database.service';
 
-import {IDatabaseConnector} from "./api/database/database.connector";
-import {SQLiteConnector} from "./implementation/database/sqlite.connector";
-import {populationQueries} from "./database.service";
-
-import * as express from "express";
-import * as bodyParser from "body-parser";
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
 
 // Test modules
-import {testHelloWorld} from "./implementation/test/helloworld.test";
-import {testHelloSqlite} from "./implementation/test/sqlite.test";
+import {testHelloWorld} from './implementation/test/helloworld.test';
+import {testHelloSqlite} from './implementation/test/sqlite.test';
 
 // Functional modules
-import {accountModule} from "./implementation/account/account.server";
+import {accountModule} from './implementation/account/account.server';
 
 const app = express();
-const projectRoot = __dirname + "/../../../";
+const projectRoot = __dirname + '/../../../';
 
 app.use(express.static(projectRoot));
-app.use(express.static(join(projectRoot + "/node_modules")));
-app.use(express.static(join(projectRoot + "/tools")));
+app.use(express.static(join(projectRoot + '/node_modules')));
+app.use(express.static(join(projectRoot + '/tools')));
 app.use(bodyParser.urlencoded({extended: false}));
 
-const serverPort: number = 3000;
+const serverPort = 3000;
 
 // TODO Put db information into gitignored external file
 
-const dbFilename: string = "./countable-database.sqlite";
+const dbFilename = './countable-database.sqlite';
 const databaseConnector: IDatabaseConnector = new SQLiteConnector(dbFilename);
 
 populationQueries.forEach(function (query) {
@@ -40,8 +40,8 @@ testHelloSqlite(app, databaseConnector);
 // Functional modules
 accountModule(app, databaseConnector);
 
-app.get("/*", function (req, res) {
-    res.sendFile(join(projectRoot + "/index.html"));
+app.get('/*', function (req, res) {
+    res.sendFile(join(projectRoot + '/index.html'));
 });
 
 app.listen(serverPort);

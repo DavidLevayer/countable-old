@@ -1,5 +1,5 @@
-import {Request} from "express";
-import {Response} from "express";
+import {Request} from 'express';
+import {Response} from 'express';
 
 export interface IDatabaseConnector {
 

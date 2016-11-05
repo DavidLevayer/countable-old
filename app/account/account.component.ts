@@ -1,12 +1,12 @@
-import {Component, OnInit} from "@angular/core";
-import {Account} from "./account";
-import {AccountService} from "./account.service";
+import {Component, OnInit} from '@angular/core';
+import {Account} from './account';
+import {AccountService} from './account.service';
 
 @Component({
     providers: [AccountService],
-    selector: "account",
-    styleUrls: ["app/shared/css/common.css"],
-    templateUrl: "app/account/account.component.html",
+    selector: 'app-account',
+    styleUrls: ['app/shared/css/common.css'],
+    templateUrl: 'app/account/account.component.html',
 })
 
 export class AccountComponent implements OnInit {
@@ -62,7 +62,7 @@ export class AccountComponent implements OnInit {
      */
     public createAccount() {
 
-        const name: string = $("#modal-account-create-account-name").val();
+        const name: string = $('#modal-account-create-account-name').val();
 
         this.accountService.createAccount(name.trim())
             .then(
@@ -77,7 +77,7 @@ export class AccountComponent implements OnInit {
      * @param name the account new name
      */
     public editAccount(id: number) {
-        let name = $("#account_" + id).find("input").val();
+        let name = $('#account_' + id).find('input').val();
         this.accountService.editAccount(id, name.trim()).catch(error => this.error = error);
         this.toogleEditMode(id);
     }
@@ -90,7 +90,7 @@ export class AccountComponent implements OnInit {
 
         this.accountService.deleteAccount(id)
             .then(
-                res => $("#account_" + id).parent().remove(),
+                res => $('#account_' + id).parent().remove(),
                 error => this.error = error
             );
     }
@@ -100,21 +100,21 @@ export class AccountComponent implements OnInit {
      * @param id the account id
      */
     public toogleEditMode(id: number) {
-        let cell = $("#account_" + id);
+        let cell = $('#account_' + id);
 
         if (this.editMode) {
-            let text = cell.find("input").val();
+            let text = cell.find('input').val();
 
             cell
                 .empty()
-                .append("<span>" + text + "</span>");
+                .append('<span>' + text + '</span>');
 
         } else {
 
             let text = cell.text();
-            let input = $("<input>")
-                .attr("id", "input_account_" + id)
-                .attr("data-old", text)
+            let input = $('<input>')
+                .attr('id', 'input_account_' + id)
+                .attr('data-old', text)
                 .val(text);
 
             cell
@@ -130,8 +130,8 @@ export class AccountComponent implements OnInit {
      * @param id the account id
      */
     public cancelModification(id: number) {
-        let input = $("#account_" + id).find("input");
-        let oldText = input.attr("data-old");
+        let input = $('#account_' + id).find('input');
+        let oldText = input.attr('data-old');
         input.val(oldText);
 
         this.toogleEditMode(id);
