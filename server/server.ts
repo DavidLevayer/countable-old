@@ -1,5 +1,4 @@
-
-import {join} from "path";
+import {join} from 'path';
 import {IDatabaseConnector} from './api/database/database.connector';
 import {SQLiteConnector} from './implementation/database/sqlite.connector';
 import {populationQueries} from './database.service';
