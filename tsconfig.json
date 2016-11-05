@@ -4,11 +4,11 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "mapRoot": "./",
-    "module": "es6",
+    "module": "commonjs",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noImplicitAny": false,
-    "outDir": "../dist/js",
+    "outDir": "./dist/js",
     "sourceMap": true,
     "target": "es5",
     "typeRoots": [
