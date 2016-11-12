@@ -1,13 +1,8 @@
-// #docregion
-// /*global jasmine, __karma__, window*/
-Error.stackTraceLimit = 0; // "No stacktrace"" is usually best for app testing.
-
-// Uncomment to get full stacktrace output. Sometimes helpful, usually not.
-// Error.stackTraceLimit = Infinity; //
+Error.stackTraceLimit = 3;
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
 
-var builtPath = '/base/dist/';
+var builtPath = '/base/dist/js';
 
 __karma__.loaded = function () { };
 

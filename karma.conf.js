@@ -1,9 +1,9 @@
 // #docregion
 module.exports = function(config) {
 
-    var appBase    = 'dist/';       // transpiled app JS and map files
-    var appSrcBase = 'app/';        // app source TS files
-    var appAssets  = 'base/app/';   // component assets fetched by Angular's compiler
+    var appBase    = 'dist/js/';       // transpiled app JS and map files
+    var appSrcBase = 'app/';       // app source TS files
+    var appAssets  = '/base/app/'; // component assets fetched by Angular's compiler
 
     config.set({
         basePath: '',
@@ -74,4 +74,4 @@ module.exports = function(config) {
         browsers: ['Chrome'],
         singleRun: false
     })
-}
+};
