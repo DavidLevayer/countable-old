@@ -1,23 +1,22 @@
 {
   "compilerOptions": {
-    "declaration": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "mapRoot": "./",
+    "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
-    "noEmitOnError": true,
-    "noImplicitAny": false,
-    "outDir": "./dist/js",
     "sourceMap": true,
-    "target": "es5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
     "typeRoots": [
-      "./node_modules/@types"
-    ]
+      "./node_modules/@types/"
+    ],
+    "outDir": "dist/js"
   },
+  "compileOnSave": true,
   "exclude": [
-    "node_modules",
-    "typings/globals",
-    "dist"
+    "node_modules/*",
+    "**/*-aot.ts"
   ]
 }

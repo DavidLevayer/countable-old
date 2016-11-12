@@ -31,7 +31,7 @@ export class SQLiteConnector implements IDatabaseConnector {
 
         // TODO Manage if db is undefined
 
-        const callback = function (err, rows) {
+        const callback = function (err: any, rows: any) {
 
             if (!err) {
                 console.log('Running query "' + query + '"');

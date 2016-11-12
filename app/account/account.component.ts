@@ -14,12 +14,12 @@ export class AccountComponent implements OnInit {
     /**
      * List of accounts displayed
      */
-    private accounts: Account[];
+    public accounts: Account[];
 
     /**
      * Error message
      */
-    private error: string;
+    public error: string;
 
     /**
      * True if editing an account ; false otherwise

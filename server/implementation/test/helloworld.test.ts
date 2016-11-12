@@ -1,4 +1,6 @@
-export function testHelloWorld(app) {
+import {Application} from 'express';
+
+export function testHelloWorld(app: Application) {
 
     /**
      * Returns 'hello world' (debug function)

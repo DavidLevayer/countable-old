@@ -1,5 +1,4 @@
-
-import {join} from "path";
+import {join} from 'path';
 import {IDatabaseConnector} from './api/database/database.connector';
 import {SQLiteConnector} from './implementation/database/sqlite.connector';
 import {populationQueries} from './database.service';
@@ -14,7 +13,7 @@ import {testHelloSqlite} from './implementation/test/sqlite.test';
 // Functional modules
 import {accountModule} from './implementation/account/account.server';
 
-const app = express();
+const app: express.Application = express();
 const projectRoot = __dirname + '/../../../';
 
 app.use(express.static(projectRoot));
