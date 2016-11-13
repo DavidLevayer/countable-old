@@ -13,6 +13,12 @@ List of planned functionality:
 - [ ] Statistic tools and graphics
 - [ ] Multi-user application
 
+List of developer features:
+- [x] Unit tests
+- [ ] Code coverage tool
+- [ ] End-to-end (e2e) tests
+- [ ] Continuous integration
+
 # Installation
 
 You need npm installed on your machine. Just clone the project and run:
