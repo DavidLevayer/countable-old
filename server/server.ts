@@ -18,7 +18,6 @@ const projectRoot = __dirname + '/../../../';
 
 app.use(express.static(projectRoot));
 app.use(express.static(join(projectRoot + '/node_modules')));
-app.use(express.static(join(projectRoot + '/tools')));
 app.use(bodyParser.urlencoded({extended: false}));
 
 const serverPort = 3000;
