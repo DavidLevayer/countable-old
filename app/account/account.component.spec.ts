@@ -1,10 +1,10 @@
 import {AccountComponent} from './account.component';
-import {AccountService} from "./account.service";
+import {AccountService} from './account.service';
 import {TestBed, ComponentFixture, async} from '@angular/core/testing';
 import {Account} from './account';
 import {HttpModule} from '@angular/http';
-import {MaterialModule, MdIconRegistry} from "@angular/material";
-import {FormsModule} from "@angular/forms";
+import {MaterialModule, MdIconRegistry} from '@angular/material';
+import {FormsModule} from '@angular/forms';
 
 describe('component: AccountComponent', () => {
 
