@@ -1,182 +1,68 @@
 # Project overview
 
-TODO
+This project aims to provide an easy and complete way to manage your bank accounts.
+/!\ Currently, it is not possible to use the application as the development is still ongoing.
 
-# Node.js
+List of planned functionality:
+- [x] Create and manage accounts
+- [ ] Create and manage categories
+- [ ] Create and manage subcategories
+- [ ] Standard transactions (incomes/expenses)
+- [ ] Account-to-account transactions
+- [ ] Dashboard
+- [ ] Statistic tools and graphics
+- [ ] Multi-user application
 
-## Configuration
+# Installation
 
-#### ```Package.json``` properties
+You need npm installed on your machine. Just clone the project and run:
+```npm install```
 
-scripts:
-* start: command lines executed when running ```npm start``` command
-* postinstall: command lines executed after running ```npm install``` command AND after installation process is completed
+Then:
+```npm start```
+
+If you want to launch tests:
+```npm test```
+
+If you want to run tslint:
+```npm run lint```
 
 # Dependencies
 
-## Typescript
+## Application dependencies
 
-#### What is it?
-TypeScript is a free and open source programming language developed and maintained by Microsoft. It is a strict superset of JavaScript, and adds optional static typing and class-based object-oriented programming to the language.
+Name | Description
+------------ | -------------
+@angular | Angular framework components, version 2.X.X.
+@angular/material | A lightweight set of AngularJS-native UI elements that implement the material design specification.
+angular-in-memory-web-api | This in-memory web api service processes an HTTP request and returns an Observable of HTTP Response object in the manner of a RESTy web api.
+body-parser | Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+boostrap | Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development.
+components-font-awesome |  Font Awesome gives you scalable vector icons that can instantly be customized — size, color, drop shadow, and anything that can be done with the power of CSS.
+core-js | Modular standard library for JavaScript.
+express | Fast, unopinionated, minimalist web framework for node.
+jquery | jQuery is a fast, small, and feature-rich JavaScript library.
+reflect-metadata | Proposal to add Decorators to ES7, along with a prototype for an ES7 Reflection API for Decorator Metadata.
+rxjs | Reactive Extensions Library for JavaScript. 
+sqlite3 | Asynchronous, non-blocking SQLite3 bindings.
+systemjs | Universal dynamic module loader - loads ES6 modules, AMD, CommonJS and global scripts in the browser and NodeJS.
+zone.js | Implements Zones for JavaScript. A Zone is an execution context that persists across async tasks. You can think of it as thread-local storage for JavaScript VMs.
 
-#### How to use?
-Add dependency in __package.json__:
-```json
-{
-    "devDependencies": {
-        "typescript": "^1.8.10"
-    }
-}
-```
-The __tsconfig.json__ file specifies the root files and the compiler options required to compile the project:
-```json
-{
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false,
-    "outDir" : "./dist/js"
-  },
-  "compileOnSave": false,
-  "exclude": [
-    "node_modules",
-    "typings",
-    "dist"
-  ]
-}
-```
-```compilerOptions --module``` Specify module code generation.
+## Developer dependencies
 
-```compilerOptions --outDir``` Redirect output structure to the directory.
+Name | Description
+------------ | -------------
+@types | Type definitions for typescript support
+codelyzer | A set of tslint rules for static code analysis of Angular TypeScript projects.
+concurrently | Run multiple commands concurrently.
+jasmine-core | Jasmine is a Behavior Driven Development testing framework for JavaScript.
+karma | Karma is a test runner for Javascript. It's a simple tool that allows you to execute JavaScript code in multiple real browsers.
+karma-chrome-launcher | A Karma plugin. Launcher for Chrome and Chrome Canary.
+karma-jasmine | A Karma plugin. Adapter for Jasmine testing framework.
+karma-mocha-reporter | Karma reporter with mocha style logging.
+tslint | An extensible static analysis linter for the TypeScript language.
+typescript | TypeScript is a language for application-scale JavaScript. TypeScript adds optional types, classes, and modules to JavaScript. TypeScript compiles to readable, standards-based JavaScript. 
 
-```compileOnSave``` Signal to IDE to generate all files upon saving.
+# Contribution
 
-```exclude``` Exclude all files in specified directories.
-
-Because there is no ```files``` property set, all Typescript files are included (except for those in ```exclude``` directories).
-
-#### More information
-http://www.typescriptlang.org/index.html
-
-http://www.typescriptlang.org/docs/handbook/tsconfig-json.html
-
-https://angular.io/docs/ts/latest/guide/typescript-configuration.html
-## Typings
-
-#### What is it?
-Typings is the simple way to manage and install TypeScript definitions.
-#### How to use?
-Add dependency in __package.json__:
-```json
-{
-    "devDependencies": {
-        "typings": "^1.0.4"
-    }
-}
-```
-Install it globally (not a requirement, but definitely more practical):
-```shell
-npm install typings --global
-```
-The __typings.json__ file specifies what JS definition are required for the project:
-```json
-{
-  "globalDependencies": {
-    "core-js": "registry:dt/core-js#0.0.0+20160317120654",
-    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
-    "mysql": "registry:dt/mysql#0.0.0+20160316155526",
-    "node": "registry:dt/node#4.0.0+20160509154515"
-  }
-}
-
-```
-
-#### Install new typings definition
-```shell
-typings install <definitionName> --save
-```
-
---save option permits to update your ```typings.json``` file. A simple way to find out __definitionName__ is to use ```typings search``` command.
-
-Then just download and install definitions:
-```shell
-typings install                  # simple way, but require global installation
-npm run typings -- install       # other way through npm ; require to define command in "scripts" in package.json
-```
-#### More information
-https://github.com/typings/typings
-
-https://angular.io/docs/ts/latest/guide/typescript-configuration.html#!#typings
-
-## Express
-#### What is it?
-Express is a simple web framework for Node.js. It allows to simplify basic tasks like routing.
-#### How to use?
-Add dependency in __package.json__:
-```json
-{
-    "dependencies": {
-        "express": "^4.13.4"
-    }
-}
-```
-#### More information
-http://expressjs.com/
-
-## Systemjs
-#### What is it?
-Systemjs is an universal dynamic module loader. It allows to import module in a more practical way.
-#### How to use?
-Add dependency in __package.json__:
-```json
-{
-    "dependencies": {
-        "systemjs": "0.19.27"
-    }
-}
-```
-The __systemjs.config.js__ file specifies the root files and the compiler options required to compile the project:
-```javascript
-(function(global) {
-    // map tells the System loader where to look for things
-    var map = {
-        'app':                        'dist/js',
-    };
-    // packages tells the System loader how to load when no filename and/or no extension
-    var packages = {
-        'app':                        { main: 'main.js',  defaultExtension: 'js' },
-    };
-    // filterSystemConfig - index.html's chance to modify config before we register it.
-    if (global.filterSystemConfig) { global.filterSystemConfig(config); }
-    System.config(config);
-})(this);
-```
-#### More information
-https://github.com/systemjs/systemjs
-
-https://github.com/systemjs/systemjs/blob/master/docs/config-api.md
-
-## MySQL
-#### What is it?
-Let's assume you know what MySQL is and what it is used for :)
-#### How to use?
-Add dependency in __package.json__:
-```json
-{
-    "dependencies": {
-        "mysql": "^2.5.4"
-    }
-}
-```
-Add Typings definition:
-```shell
-typings install mysql --save
-```
-#### More information
-https://codeforgeek.com/2015/01/nodejs-mysql-tutorial/
-
+If you want to contribute to this project, do not hesitate to submit advice, issues or pull requests.
