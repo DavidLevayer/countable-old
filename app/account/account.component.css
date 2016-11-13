@@ -1,0 +1,28 @@
+.md-card-container {
+    padding: 5px;
+}
+
+md-card {
+    padding-top: 15px;
+}
+
+md-card-subtitle {
+    display: inline-block;
+    float: right;
+    margin-top: 8px !important;
+}
+
+md-card-title {
+    display: inline-block;
+    color: orange;
+}
+
+md-card button {
+    color: gray;
+    font-weight: normal;
+}
+
+md-card md-icon {
+    font-size: 20px;
+    color: gray;
+}

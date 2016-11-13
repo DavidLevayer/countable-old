@@ -1,6 +1,6 @@
 <div class="header">
     <h1 class="title">List of accounts</h1>
-    <button data-toggle="modal" data-target="#modal-account-create" class="btn btn-default btn-new pull-right">New
+    <button data-toggle="modal" data-target="#modal-account-create" class="btn btn-primary btn-new pull-right">New
         Account
     </button>
 </div>
@@ -10,33 +10,28 @@
 </div>
 
 <div class="col-sm-12 col-xs-12 ">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th class="col-sm-1 hidden-xs">#</th>
-            <th class="col-sm-8 col-xs-9">Name</th>
-            <th class="col-xs-3"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let account of accounts">
-            <th scope="row">{{account.accountId}}</th>
-            <td id="account_{{account.accountId}}">
-                <span>{{account.name}}</span>
-            </td>
-            <td>
-                <button (click)="toogleEditMode(account.accountId)"
-                        class="btn btn-icon btn-xs btn-default fa fa-pencil fa-fw" [disabled]="editMode"></button>
-                <button (click)="editAccount(account.accountId)" *ngIf="editMode==true"
-                        class="btn btn-icon btn-xs btn-default fa fa-check fa-fw"></button>
-                <button (click)="cancelModification(account.accountId)" *ngIf="editMode==true"
-                        class="btn btn-icon btn-xs btn-default fa fa-remove fa-fw"></button>
-                <button (click)="deleteAccount(account.accountId)"
-                        class="btn btn-icon btn-xs btn-default fa fa-trash fa-fw"></button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
+    <div *ngFor="let account of accounts" class="col-sm-4 md-card-container">
+        <md-card>
+            <md-card-title>{{account.name}}</md-card-title>
+            <md-card-subtitle>#<span id="account_{{account.accountId}}">{{account.accountId}}</span></md-card-subtitle>
+            <md-card-content>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+            </md-card-content>
+            <md-card-actions>
+                <button md-button data-toggle="modal" data-target="#modal-account-edit" (click)="toggleEdit(account.accountId, account.name)">
+                    <md-icon>edit</md-icon>
+                    Edit
+                </button>
+                <button md-button data-toggle="modal" data-target="#modal-account-delete" (click)="toggleDelete(account.accountId)">
+                    <md-icon>delete</md-icon>
+                    Delete
+                </button>
+            </md-card-actions>
+        </md-card>
+    </div>
+
 </div>
 
 <!-- Create account modal -->
@@ -53,13 +48,66 @@
                 <fieldset class="form-group">
                     <label for="modal-account-create-account-name">Account name</label>
                     <input id="modal-account-create-account-name" type="text" class="form-control"
-                           placeholder="Enter account name">
+                           placeholder="Enter account name" [(ngModel)]="creationName">
                 </fieldset>
             </div>
             <div class="modal-footer">
-                <button (click)="createAccount()" type="button" class="btn btn-default" data-dismiss="modal">Create
+                <button (click)="createAccount(creationName)" type="button"
+                        class="btn btn-default" data-dismiss="modal">Create
                 </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Edit account modal -->
+<div id="modal-account-edit" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Set account name</h4>
+            </div>
+            <div class="modal-body">
+                <fieldset class="form-group">
+                    <label for="modal-account-edit-account-name">New account name</label>
+                    <input id="modal-account-edit-account-name" type="text" class="form-control"
+                           placeholder="Enter account name" [(ngModel)]="editionName">
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button (click)="editAccount(editionId, editionName)" type="button"
+                        class="btn btn-default" data-dismiss="modal">Edit
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Delete account modal -->
+<div id="modal-account-delete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this account? This operation cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button (click)="deleteAccount(deletionId)" type="button"
+                        class="btn btn-default btn-danger" data-dismiss="modal">Delete
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
 
