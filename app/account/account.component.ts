@@ -54,7 +54,15 @@ export class AccountComponent implements OnInit {
     public getAccount(id: number) {
         this.accountService.getAccount(id)
             .then(
-                account => this.accounts.push(account[0]),
+                res => {
+                    let account = res[0];
+                    let existingAccount = this.accounts.find(function (ac: Account) {
+                        return ac.accountId === id;
+                    });
+                    if (!existingAccount) {
+                        this.accounts.push(account);
+                    }
+                },
                 error => this.error = error
             );
     }
@@ -83,13 +91,18 @@ export class AccountComponent implements OnInit {
      */
     public editAccount(id: number, name: string) {
 
-        this.accountService.editAccount(id, name.trim()).catch(error => this.error = error);
-        // Reset the modal field
-        this.toggleEdit(null, '');
-        // Refresh value displayed
-        this.accounts.find(function (ac: Account) {
-            return ac.accountId === id;
-        }).name = name;
+        this.accountService.editAccount(id, name.trim())
+            .then(
+                () => {
+                    // Reset the modal field
+                    this.toggleEdit(null, '');
+                    // Refresh value displayed
+                    this.accounts.find(function (ac: Account) {
+                        return ac.accountId === id;
+                    }).name = name;
+                },
+                error => this.error = error
+            );
     }
 
     /**
@@ -98,13 +111,18 @@ export class AccountComponent implements OnInit {
      */
     public deleteAccount(id: number) {
 
-        this.accountService.deleteAccount(id).catch(error => this.error = error);
-        // Reset the modal field
-        this.toggleDelete(null);
-        // Refresh value displayed
-        this.accounts = this.accounts.filter(function(ac: Account){
-            return ac.accountId !== id;
-        });
+        this.accountService.deleteAccount(id)
+            .then(
+                () => {
+                    // Reset the modal field
+                    this.toggleDelete(null);
+                    // Refresh value displayed
+                    this.accounts = this.accounts.filter(function (ac: Account) {
+                        return ac.accountId !== id;
+                    });
+                },
+                error => this.error = error
+            );
     }
 
     public toggleEdit(id: number, name: string) {
@@ -112,7 +130,7 @@ export class AccountComponent implements OnInit {
         this.editionName = name;
     }
 
-    public toggleDelete(id: number){
+    public toggleDelete(id: number) {
         this.deletionId = id;
     }
 }
