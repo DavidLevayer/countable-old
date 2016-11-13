@@ -5,7 +5,7 @@ import {AccountService} from './account.service';
 @Component({
     providers: [AccountService],
     selector: 'app-account',
-    styleUrls: ['app/shared/css/common.css'],
+    styleUrls: ['app/shared/css/common.css', 'app/account/account.component.css'],
     templateUrl: 'app/account/account.component.html',
 })
 
@@ -21,11 +21,13 @@ export class AccountComponent implements OnInit {
      */
     public error: string;
 
-    /**
-     * True if editing an account ; false otherwise
-     * @type {boolean}
-     */
-    private editMode: boolean = false;
+    private creationName: string;
+
+    private editionId: number;
+
+    private editionName: string;
+
+    private deletionId: number;
 
     constructor(private accountService: AccountService) {
     }
@@ -35,7 +37,7 @@ export class AccountComponent implements OnInit {
     }
 
     /**
-     * Get list of accounts from server
+     * Get list of accounts from server and initiate the list of accounts
      */
     public getAccounts() {
         this.accountService.getAccounts()
@@ -46,7 +48,7 @@ export class AccountComponent implements OnInit {
     }
 
     /**
-     * Get account with given id
+     * Get account with given id and add it to the list of accounts
      * @param id the account id
      */
     public getAccount(id: number) {
@@ -58,82 +60,59 @@ export class AccountComponent implements OnInit {
     }
 
     /**
-     * Create an account
+     * Create an account. If the creation process is successful, the new account is added
+     * to the list of accounts
+     * @param name the name of the account to create
      */
-    public createAccount() {
-
-        const name: string = $('#modal-account-create-account-name').val();
+    public createAccount(name: string) {
 
         this.accountService.createAccount(name.trim())
             .then(
-                res => this.getAccount(res.insertId),
+                res => {
+                    this.getAccount(res.insertId);
+                    this.creationName = '';
+                },
                 error => this.error = error
             );
     }
 
     /**
-     * Modify an account name using associated service
+     * Modify an account name in both the list and the database
      * @param id the account id
-     * @param name the account new name
+     * @param name the name to set
      */
-    public editAccount(id: number) {
-        let name = $('#account_' + id).find('input').val();
+    public editAccount(id: number, name: string) {
+
         this.accountService.editAccount(id, name.trim()).catch(error => this.error = error);
-        this.toogleEditMode(id);
+        // Reset the modal field
+        this.toggleEdit(null, '');
+        // Refresh value displayed
+        this.accounts.find(function (ac: Account) {
+            return ac.accountId === id;
+        }).name = name;
     }
 
     /**
-     * Remove an account using associated service
+     * Remove an account from both the list and the database
      * @param id the account id
      */
     public deleteAccount(id: number) {
 
-        this.accountService.deleteAccount(id)
-            .then(
-                res => $('#account_' + id).parent().remove(),
-                error => this.error = error
-            );
+        this.accountService.deleteAccount(id).catch(error => this.error = error);
+        // Reset the modal field
+        this.toggleDelete(null);
+        // Refresh value displayed
+        this.accounts = this.accounts.filter(function(ac: Account){
+            return ac.accountId !== id;
+        });
     }
 
-    /**
-     * Toggle edit mode: add input for account name edition
-     * @param id the account id
-     */
-    public toogleEditMode(id: number) {
-        let cell = $('#account_' + id);
-
-        if (this.editMode) {
-            let text = cell.find('input').val();
-
-            cell
-                .empty()
-                .append('<span>' + text + '</span>');
-
-        } else {
-
-            let text = cell.text();
-            let input = $('<input>')
-                .attr('id', 'input_account_' + id)
-                .attr('data-old', text)
-                .val(text);
-
-            cell
-                .empty()
-                .append(input);
-        }
-
-        this.editMode = !this.editMode;
+    public toggleEdit(id: number, name: string) {
+        this.editionId = id;
+        this.editionName = name;
     }
 
-    /**
-     * Cancel account name modification
-     * @param id the account id
-     */
-    public cancelModification(id: number) {
-        let input = $('#account_' + id).find('input');
-        let oldText = input.attr('data-old');
-        input.val(oldText);
-
-        this.toogleEditMode(id);
+    public toggleDelete(id: number){
+        this.deletionId = id;
     }
 }
