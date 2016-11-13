@@ -32,7 +32,7 @@ describe('component: AccountComponent', () => {
             .and.returnValue(Promise.resolve(accountMocks));
 
         spyOn(accountService, 'getAccount')
-            .and.callFake(function (id: number) {
+            .and.callFake(function (id: number): Promise<any> {
 
             let mockAccount: Account = accountMocks.find(function (ac: Account) {
                 return ac.accountId === id;
@@ -42,28 +42,58 @@ describe('component: AccountComponent', () => {
                 return Promise.resolve([mockAccount]);
             }
 
-            return Promise.resolve([]);
+            return Promise.reject('no account');
         });
 
         spyOn(accountService, 'createAccount')
-            .and.callFake(function (name: string) {
+            .and.callFake(function (name: string): Promise<any> {
 
-            let mockAccount: Account = new Account(42, name);
+            let mockAccount: Account = accountMocks.find(function (ac: Account) {
+                return ac.name === name;
+            });
+
+            if (mockAccount !== undefined) {
+                return Promise.reject('name already used');
+            }
+
+            mockAccount = new Account(42, name);
             accountMocks.push(mockAccount);
             return Promise.resolve({insertId: 42});
         });
 
         spyOn(accountService, 'editAccount')
-            .and.callFake(function (id: number, name: string) {
+            .and.callFake(function (id: number, name: string): Promise<any> {
 
-            accountMocks.find(function (ac: Account) {
+            let mockAccount: Account = accountMocks.find(function (ac: Account) {
                 return ac.accountId === id;
-            }).name = name;
+            });
+
+            if (mockAccount === undefined) {
+                return Promise.reject('no account');
+            }
+
+            let existingMockAccount: Account = accountMocks.find(function (ac: Account) {
+                return ac.name === name && ac.accountId !== id;
+            });
+
+            if (existingMockAccount !== undefined) {
+                return Promise.reject('name already used');
+            }
+
+            mockAccount.name = name;
             return Promise.resolve(0);
         });
 
         spyOn(accountService, 'deleteAccount')
-            .and.callFake(function (id: number) {
+            .and.callFake(function (id: number): Promise<any> {
+
+            let mockAccount: Account = accountMocks.find(function (ac: Account) {
+                return ac.accountId === id;
+            });
+
+            if (mockAccount === undefined) {
+                return Promise.reject('no account');
+            }
 
             accountMocks = accountMocks.filter(function (ac: Account) {
                 return ac.accountId !== id;
@@ -79,11 +109,28 @@ describe('component: AccountComponent', () => {
         });
     }));
 
-    it('should get an account', async(() => {
+    it('should get an account that does exist', async(() => {
         fixture.detectChanges();
         fixture.whenStable().then(() => {
             comp.getAccount(626);
-            expect(comp.accounts).toEqual(accountMocks);
+            // Wait for changes to be effective
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                expect(comp.accounts).toEqual(accountMocks);
+            });
+        });
+    }));
+
+    it('should not get an account that does not exist', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+            comp.getAccount(999);
+            // Wait for changes to be effective
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                expect(comp.accounts).toEqual(accountMocks);
+                expect(comp.error).toBe('no account');
+            });
         });
     }));
 
@@ -91,16 +138,62 @@ describe('component: AccountComponent', () => {
         fixture.detectChanges();
         fixture.whenStable().then(() => {
             comp.createAccount('newAccount');
-            expect(comp.accounts.length).toBe(2);
-            expect(comp.accounts).toEqual(accountMocks);
+            // Wait for changes to be effective
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                expect(comp.accounts).toEqual(accountMocks);
+            });
+        });
+    }));
+
+    it('should not create an account with existing name', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+            comp.createAccount('newAccount');
+            // Wait for changes to be effective
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                expect(comp.accounts).toEqual(accountMocks);
+                expect(comp.error).toBe('name already used');
+            });
         });
     }));
 
     it('should edit an account', async(() => {
         fixture.detectChanges();
         fixture.whenStable().then(() => {
-            comp.editAccount(626, 'newAccountEdited');
-            expect(comp.accounts).toEqual(accountMocks);
+            comp.editAccount(42, 'newAccountEdited');
+            // Wait for changes to be effective
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                expect(comp.accounts).toEqual(accountMocks);
+            });
+        });
+    }));
+
+    it('should not edit an account that does not exist', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+            comp.editAccount(999, 'newAccountEdited');
+            // Wait for changes to be effective
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                expect(comp.accounts).toEqual(accountMocks);
+                expect(comp.error).toBe('no account');
+            });
+        });
+    }));
+
+    it('should not edit an account with an existing name', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+            comp.editAccount(42, 'mock');
+            // Wait for changes to be effective
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                expect(comp.accounts).toEqual(accountMocks);
+                expect(comp.error).toBe('name already used');
+            });
         });
     }));
 
@@ -112,6 +205,19 @@ describe('component: AccountComponent', () => {
             fixture.detectChanges();
             fixture.whenStable().then(() => {
                 expect(comp.accounts).toEqual(accountMocks);
+            });
+        });
+    }));
+
+    it('should not delete an account that does not exist', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+            comp.deleteAccount(999);
+            // Wait for account to be deleted
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                expect(comp.accounts).toEqual(accountMocks);
+                expect(comp.error).toBe('no account');
             });
         });
     }));
