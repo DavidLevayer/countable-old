@@ -9,13 +9,15 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {AccountComponent} from './account/account.component';
 import {FormsModule} from '@angular/forms';
 import {MaterialModule} from '@angular/material';
+import {Ng2MaterialModule} from 'ng2-material';
 
 @NgModule({
     bootstrap: [AppComponent],
     declarations: [AppComponent, DashboardComponent, AccountComponent],
-    imports: [BrowserModule, AppRoutingModule, HttpModule, MaterialModule.forRoot(), FormsModule],
+    imports: [BrowserModule, AppRoutingModule, HttpModule, FormsModule, Ng2MaterialModule.forRoot()],
+    exports: [Ng2MaterialModule],
     entryComponents: [],
-    providers: [],
+    providers: []
 })
 export class AppModule {
 }
