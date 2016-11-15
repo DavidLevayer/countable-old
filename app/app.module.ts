@@ -9,11 +9,12 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {AccountComponent} from './account/account.component';
 import {FormsModule} from '@angular/forms';
 import {MaterialModule} from '@angular/material';
+import {MdlButtonModule, MdlIconModule} from 'angular2-mdl';
 
 @NgModule({
     bootstrap: [AppComponent],
     declarations: [AppComponent, DashboardComponent, AccountComponent],
-    imports: [BrowserModule, AppRoutingModule, HttpModule, MaterialModule.forRoot(), FormsModule],
+    imports: [BrowserModule, AppRoutingModule, HttpModule, MaterialModule.forRoot(), FormsModule, MdlButtonModule.forRoot(), MdlIconModule.forRoot()],
     entryComponents: [],
     providers: [],
 })
