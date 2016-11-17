@@ -43,6 +43,9 @@ module.exports = function(config) {
             { pattern: 'systemjs.config.js', included: false, watched: false },
             'karma-test-shim.js',
 
+            // angular2-mdl dependencies
+            { pattern: 'node_modules/angular2-mdl/**/*.js', included: false, watched: false },
+
             // transpiled application & spec code paths loaded via module imports
             { pattern: appBase + '**/*.js', included: false, watched: true },
 
@@ -54,7 +57,7 @@ module.exports = function(config) {
 
             // Paths for debugging with source maps in dev tools
             { pattern: appSrcBase + '**/*.ts', included: false, watched: false },
-            { pattern: appBase + '**/*.js.map', included: false, watched: false },
+            { pattern: appBase + '**/*.js.map', included: false, watched: false }
         ],
 
         // Proxied base paths for loading assets
