@@ -4,43 +4,36 @@
 }
 
 .header > button {
-    margin-top: 10px;
+    margin-top: -10px;
+}
+
+.header > button > mdl-icon {
+    margin-top: -4px;
+    margin-left: -8px;
 }
 
 .title {
-    color: #666;
-    font-weight: bold;
+    text-transform: uppercase;
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    line-height: 32px;
     display: inline;
 }
 
-.title.pull-right {
-    margin-left: 10px;
+.title + button {
+    margin-left: 15px;
 }
 
-.title.pull-left {
-    margin-right: 10px;
-}
-
-.btn-primary {
-    background: orange;
+.border-accent {
     border: 1px solid darkorange;
-    outline: none;
 }
 
-.btn-primary:hover {
-    background: darkorange;
+.mdl-textfield {
+    padding-bottom: 25px;
+    width: 100%;
 }
 
-.btn-icon {
-    border: none;
-    color: grey;
-}
-
-.btn-icon:hover, .btn-icon:active {
-    background: transparent !important;
-}
-
-.btn-icon:focus, .btn-icon:active {
-    box-shadow: none;
-    outline: 0;
+.mdl-button--accent.mdl-button--accent.mdl-button--raised,
+.mdl-button--accent.mdl-button--accent.mdl-button--fab {
+    color: white;
 }

@@ -5,6 +5,7 @@ import {Account} from './account';
 import {HttpModule} from '@angular/http';
 import {MaterialModule, MdIconRegistry} from '@angular/material';
 import {FormsModule} from '@angular/forms';
+import {MdlModule} from 'angular2-mdl';
 
 describe('component: AccountComponent', () => {
 
@@ -16,7 +17,7 @@ describe('component: AccountComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [AccountComponent],
-            imports: [HttpModule, FormsModule, MaterialModule],
+            imports: [HttpModule, FormsModule, MaterialModule, MdlModule],
             providers: [AccountService, MdIconRegistry],
         })
             .compileComponents(); // compile template and css

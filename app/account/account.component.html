@@ -1,7 +1,9 @@
 <div class="header">
-    <h1 class="title">List of accounts</h1>
-    <button data-toggle="modal" data-target="#modal-account-create" class="btn btn-primary btn-new pull-right">New
-        Account
+    <h4 class="title">List of accounts</h4>
+    <button #createAccountButton mdl-button mdl-colored="accent" class="border-accent"
+            (click)="createAccountDialog.show()">
+        <mdl-icon>add</mdl-icon>
+        New Account
     </button>
 </div>
 
@@ -12,105 +14,91 @@
 <div class="col-sm-12 col-xs-12 ">
 
     <div *ngFor="let account of accounts" class="col-sm-4 md-card-container">
-        <md-card>
-            <md-card-title>{{account.name}}</md-card-title>
-            <md-card-subtitle>#<span id="account_{{account.accountId}}">{{account.accountId}}</span></md-card-subtitle>
-            <md-card-content>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
-            </md-card-content>
-            <md-card-actions>
-                <button md-button data-toggle="modal" data-target="#modal-account-edit" (click)="toggleEdit(account.accountId, account.name)">
-                    <md-icon>edit</md-icon>
+        <mdl-card mdl-shadow="2" class="mdl-shadow--2dp mdl-card">
+            <mdl-card-title>
+                <h2 mdl-card-title-text>{{account.name}}</h2>
+            </mdl-card-title>
+            <mdl-card-supporting-text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Mauris sagittis pellentesque lacus eleifend lacinia...
+            </mdl-card-supporting-text>
+            <mdl-card-actions mdl-card-border>
+                <button mdl-button mdl-ripple (click)="toggleEdit(account.accountId, account.name); editAccountDialog.show()">
                     Edit
                 </button>
-                <button md-button data-toggle="modal" data-target="#modal-account-delete" (click)="toggleDelete(account.accountId)">
-                    <md-icon>delete</md-icon>
+                <button mdl-button mdl-ripple data-toggle="modal" data-target="#modal-account-delete"
+                        (click)="toggleDelete(account.accountId); deleteAccountDialog.show()">
                     Delete
                 </button>
-            </md-card-actions>
-        </md-card>
+            </mdl-card-actions>
+        </mdl-card>
     </div>
 
 </div>
 
 <!-- Create account modal -->
-<div id="modal-account-create" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Create a new account</h4>
-            </div>
-            <div class="modal-body">
-                <fieldset class="form-group">
-                    <label for="modal-account-create-account-name">Account name</label>
-                    <input id="modal-account-create-account-name" type="text" class="form-control"
-                           placeholder="Enter account name" [(ngModel)]="creationName">
-                </fieldset>
-            </div>
-            <div class="modal-footer">
-                <button (click)="createAccount(creationName)" type="button"
-                        class="btn btn-default" data-dismiss="modal">Create
-                </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-
+<mdl-dialog #createAccountDialog
+            [mdl-dialog-config]="{
+              clickOutsideToClose: true,
+              styles:{'width': '500px'},
+              isModal:true,
+              openFrom: createAccountButton,
+              enterTransitionDuration: 400,
+              leaveTransitionDuration: 400
+              }">
+    <h4 class="mdl-dialog__title">Create a new account</h4>
+    <div class="mdl-dialog__content">
+        <mdl-textfield type="text" [(ngModel)]="creationName" placeholder="Account name"
+                       mdl-colored="accent" autofocus></mdl-textfield>
     </div>
-</div>
+    <div class="mdl-dialog__actions">
+        <button mdl-button (click)="createAccount(creationName); createAccountDialog.close()" mdl-button-type="raised"
+                mdl-colored="accent" class="mdl-button-accent" mdl-ripple>Create
+        </button>
+        <button mdl-button (click)="createAccountDialog.close()" mdl-ripple>Cancel</button>
+    </div>
+</mdl-dialog>
 
 <!-- Edit account modal -->
-<div id="modal-account-edit" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Set account name</h4>
-            </div>
-            <div class="modal-body">
-                <fieldset class="form-group">
-                    <label for="modal-account-edit-account-name">New account name</label>
-                    <input id="modal-account-edit-account-name" type="text" class="form-control"
-                           placeholder="Enter account name" [(ngModel)]="editionName">
-                </fieldset>
-            </div>
-            <div class="modal-footer">
-                <button (click)="editAccount(editionId, editionName)" type="button"
-                        class="btn btn-default" data-dismiss="modal">Edit
-                </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-
+<mdl-dialog #editAccountDialog
+            [mdl-dialog-config]="{
+              clickOutsideToClose: true,
+              styles:{'width': '500px'},
+              isModal:true,
+              enterTransitionDuration: 400,
+              leaveTransitionDuration: 200
+              }">
+    <h4 class="mdl-dialog__title">Edit account</h4>
+    <div class="mdl-dialog__content">
+        <mdl-textfield type="text" [(ngModel)]="editionName" placeholder="New account name"
+                       mdl-colored="accent" autofocus></mdl-textfield>
     </div>
-</div>
+    <div class="mdl-dialog__actions">
+        <button mdl-button (click)="editAccount(editionId, editionName); editAccountDialog.close()" mdl-button-type="raised"
+                mdl-colored="accent" class="mdl-button-accent" mdl-ripple>Edit
+        </button>
+        <button mdl-button (click)="editAccountDialog.close()" mdl-ripple>Cancel</button>
+    </div>
+</mdl-dialog>
 
 <!-- Delete account modal -->
-<div id="modal-account-delete" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Confirmation</h4>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to delete this account? This operation cannot be undone.</p>
-            </div>
-            <div class="modal-footer">
-                <button (click)="deleteAccount(deletionId)" type="button"
-                        class="btn btn-default btn-danger" data-dismiss="modal">Delete
-                </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-
+<mdl-dialog #deleteAccountDialog
+            [mdl-dialog-config]="{
+              clickOutsideToClose: true,
+              styles:{'width': '500px'},
+              isModal:true,
+              enterTransitionDuration: 400,
+              leaveTransitionDuration: 200
+              }">
+    <h4 class="mdl-dialog__title">Delete account</h4>
+    <div class="mdl-dialog__content">
+        <p>Are you sure you want to delete this account? This operation cannot be undone.</p>
     </div>
-</div>
+    <div class="mdl-dialog__actions">
+        <button mdl-button (click)="deleteAccount(deletionId); deleteAccountDialog.close()" mdl-button-type="raised"
+                mdl-colored="accent" class="mdl-button-accent btn-danger" mdl-ripple>Delete
+        </button>
+        <button mdl-button (click)="deleteAccountDialog.close()" mdl-ripple>Cancel</button>
+    </div>
+</mdl-dialog>
 
