@@ -12,6 +12,8 @@ import {testHelloSqlite} from './implementation/test/sqlite.test';
 
 // Functional modules
 import {accountModule} from './implementation/account/account.server';
+import {categoryModule} from './implementation/category/category.server';
+import {subcategoryModule} from './implementation/category/subcategory.server';
 
 const app: express.Application = express();
 const projectRoot = __dirname + '/../../../';
@@ -37,6 +39,8 @@ testHelloSqlite(app, databaseConnector);
 
 // Functional modules
 accountModule(app, databaseConnector);
+categoryModule(app, databaseConnector);
+subcategoryModule(app, databaseConnector);
 
 app.get('/*', function (req, res) {
     res.sendFile(join(projectRoot + '/index.html'));
