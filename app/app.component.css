@@ -1,0 +1,9 @@
+mdl-layout-spacer {
+    flex-grow: 0;
+    -webkit-flex-grow: 0;
+    margin-left: 55px;
+}
+
+.mdl-navigation__link {
+    text-decoration: none;
+}
