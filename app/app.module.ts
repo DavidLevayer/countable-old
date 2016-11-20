@@ -9,10 +9,15 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {AccountComponent} from './account/account.component';
 import {FormsModule} from '@angular/forms';
 import {MdlModule} from 'angular2-mdl';
+import {CategoryComponent} from './category/category.component';
 
 @NgModule({
     bootstrap: [AppComponent],
-    declarations: [AppComponent, DashboardComponent, AccountComponent],
+    declarations: [
+        AppComponent,
+        DashboardComponent,
+        AccountComponent,
+        CategoryComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
