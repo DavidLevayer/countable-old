@@ -9,7 +9,7 @@ import {MdlModule} from 'angular2-mdl';
 describe('component: AccountComponent', () => {
 
     let fixture: ComponentFixture<AccountComponent>;
-    let accountService: Account;
+    let accountService: AccountService;
     let comp: AccountComponent;
     let accountMocks = [new Account(626, 'mock')];
 
