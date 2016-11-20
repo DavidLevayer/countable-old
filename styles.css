@@ -20,7 +20,7 @@ body {
     top: 1.7em;
     left: 1.7em;
     background-color: transparent;
-    border-left: .25em solid whitesmoke;
+    border-left: .25em solid rgb(96,125,139);
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -42,7 +42,7 @@ body {
     width: 1em;
     height: 1em;
     background-color: transparent;
-    border: .25em solid orange;
+    border: .25em solid rgb(255,110,64);
     border-radius: 15%;
     -webkit-transform: translate(0, -1em) rotate(-45deg);
     -moz-transform: translate(0, -1em) rotate(-45deg);

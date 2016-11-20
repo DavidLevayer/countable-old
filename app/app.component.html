@@ -1,25 +1,25 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" routerLink="/" routerLinkActive="active">Countable</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li routerLinkActive="active"><a routerLink="/dashboard">Dashboard</a></li>
-                <li routerLinkActive="active"><a routerLink="/account">Account</a></li>
-                <li routerLinkActive="active"><a routerLink="/category">Category</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="main-body">
-    <div class="col-xs-8 col-xs-offset-2">
-        <router-outlet></router-outlet>
-    </div>
+<div class="demo-container" mdl-shadow="2">
+    <mdl-layout mdl-layout-fixed-header mdl-layout-header-seamed>
+        <mdl-layout-header>
+            <mdl-layout-header-row>
+                <mdl-layout-title>Countable</mdl-layout-title>
+                <mdl-layout-spacer></mdl-layout-spacer>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    <a class="mdl-navigation__link" routerLink="/dashboard">Dashboard</a>
+                    <a class="mdl-navigation__link" routerLink="/account">Account</a>
+                    <a class="mdl-navigation__link" routerLink="/category">Category</a>
+                </nav>
+            </mdl-layout-header-row>
+        </mdl-layout-header>
+        <mdl-layout-content>
+            <!-- Page content (start) -->
+            <div class="main-body">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+            <!-- Page content (end) -->
+        </mdl-layout-content>
+    </mdl-layout>
 </div>
