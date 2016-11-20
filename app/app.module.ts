@@ -8,7 +8,6 @@ import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {AccountComponent} from './account/account.component';
 import {FormsModule} from '@angular/forms';
-import {MaterialModule} from '@angular/material';
 import {MdlModule} from 'angular2-mdl';
 
 @NgModule({
@@ -18,7 +17,6 @@ import {MdlModule} from 'angular2-mdl';
         BrowserModule,
         AppRoutingModule,
         HttpModule,
-        MaterialModule.forRoot(),
         FormsModule,
         MdlModule
     ],

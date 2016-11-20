@@ -3,7 +3,6 @@ import {AccountService} from './account.service';
 import {TestBed, ComponentFixture, async} from '@angular/core/testing';
 import {Account} from './account';
 import {HttpModule} from '@angular/http';
-import {MaterialModule, MdIconRegistry} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {MdlModule} from 'angular2-mdl';
 
@@ -17,8 +16,8 @@ describe('component: AccountComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [AccountComponent],
-            imports: [HttpModule, FormsModule, MaterialModule, MdlModule],
-            providers: [AccountService, MdIconRegistry],
+            imports: [HttpModule, FormsModule, MdlModule],
+            providers: [AccountService],
         })
             .compileComponents(); // compile template and css
     }));
