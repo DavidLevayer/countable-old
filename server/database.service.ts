@@ -10,7 +10,7 @@ const categoryTableQuery: string =
 
 const subcategoryTableQuery: string =
     'CREATE TABLE IF NOT EXISTS Subcategory(' +
-    'categoryId INTEGER PRIMARY KEY,' +
+    'subcategoryId INTEGER PRIMARY KEY,' +
     'name TEXT NOT NULL,' +
     'refCategory INTEGER NOT NULL,' +
     'FOREIGN KEY(refCategory) REFERENCES Category(categoryId));';
