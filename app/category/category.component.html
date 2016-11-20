@@ -5,3 +5,34 @@
         New Category
     </button>
 </div>
+
+<div class="col-sm-12 col-xs-12 ">
+
+    <div *ngFor="let category of categories" class="col-sm-4 md-card-container">
+        <mdl-card mdl-shadow="2" class="mdl-shadow--2dp mdl-card">
+            <mdl-card-title>
+                <h2 mdl-card-title-text>{{category[0].name}}</h2>
+            </mdl-card-title>
+            <mdl-card-supporting-text>
+                <!-- Subcategories (start) -->
+                <mdl-list>
+                    <mdl-list-item mdl-ripple *ngFor="let subcategory of category[1]">
+                        <mdl-list-item-primary-content>
+                            {{subcategory.name}}
+                        </mdl-list-item-primary-content>
+                    </mdl-list-item>
+                </mdl-list>
+                <!-- Subcategories (end) -->
+            </mdl-card-supporting-text>
+            <mdl-card-actions mdl-card-border>
+                <button mdl-button mdl-ripple>
+                    Edit
+                </button>
+                <button mdl-button mdl-ripple>
+                    Delete
+                </button>
+            </mdl-card-actions>
+        </mdl-card>
+    </div>
+
+</div>

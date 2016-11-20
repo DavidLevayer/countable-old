@@ -1,12 +1,12 @@
 import {Http, Headers} from '@angular/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import {Category} from './category';
+import {Subcategory} from './subcategory';
 
 @Injectable()
-export class CategoryService {
+export class SubcategoryService {
 
-    private static BASE_URL: string = '/api/category/';
+    private static BASE_URL: string = '/api/subcategory/';
 
     constructor(private http: Http) {
     }
@@ -14,10 +14,10 @@ export class CategoryService {
     /**
      * Get list of categories from server
      */
-    public getCategories(): Promise<Category[]> {
-        return this.http.get(CategoryService.BASE_URL)
+    public getSubcategories(): Promise<Subcategory[]> {
+        return this.http.get(SubcategoryService.BASE_URL)
             .toPromise()
-            .then(response => response.json() as Category[])
+            .then(response => response.json() as Subcategory[])
             .catch(this.handleError);
     }
 

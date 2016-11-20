@@ -5,7 +5,7 @@ import {AccountService} from './account.service';
 @Component({
     providers: [AccountService],
     selector: 'app-account',
-    styleUrls: ['app/shared/css/common.css', 'app/account/account.component.css'],
+    styleUrls: ['app/shared/css/common.css', 'app/shared/css/mdl-card.css'],
     templateUrl: 'app/account/account.component.html',
 })
 
