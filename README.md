@@ -40,8 +40,8 @@ If you want to run tslint:
 Name | Description
 ------------ | -------------
 @angular | Angular framework components, version 2.X.X.
-@angular/material | A lightweight set of AngularJS-native UI elements that implement the material design specification.
 angular-in-memory-web-api | This in-memory web api service processes an HTTP request and returns an Observable of HTTP Response object in the manner of a RESTy web api.
+angular2-mdl | Angular 2 components, directives and styles based on material design lite https://getmdl.io (v: 1.2.1).
 body-parser | Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 boostrap | Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development.
 components-font-awesome |  Font Awesome gives you scalable vector icons that can instantly be customized — size, color, drop shadow, and anything that can be done with the power of CSS.
