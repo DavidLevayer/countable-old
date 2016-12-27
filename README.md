@@ -1,5 +1,7 @@
 # Project overview
 
+***EDIT: Project has been restarted. Find the new project [here](https://github.com/DavidLevayer/countable).***
+
 This project aims to provide an easy and complete way to manage your bank accounts.
 /!\ Currently, it is not possible to use the application as the development is still ongoing.
 
